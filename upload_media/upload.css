@@ -1,0 +1,23 @@
+#content { margin:10px 0; }
+#container { min-width:0; }
+#footer { display:none; }
+
+#uploads { list-style-type:none; padding:0; margin:0 0 0 108px; }
+.item { float:left; overflow:hidden; border:1px solid #ccc; background:#fafafa url(mimetypes/empty.png) no-repeat 41px 70px; text-align:center; cursor:pointer; width:144px; height:150px; margin:0 11px 12px 0; }
+    .popup { position:absolute; opacity:0.95; background:#eee; width:126px; height:120px; padding:5px; display:none; text-align:left; margin:15px 0 0 3px; border:1px solid #aaa; border-top-color:#ddd; border-left-color:#ddd; }
+        .popup ul { padding:0; }
+        .popup li { list-style-type:none; }
+        .popup .close { float:right; color:#CC3434; }
+        .popup input { width:116px; }
+        
+#upload-filter { position:fixed; }
+    /* TODO - find refresh icon */
+    #refresh { background:url(refresh.png) no-repeat left center; padding-left:15px; }
+        
+/* mimetypes, icons from Nuvola */
+.image { background-image:none; }
+.pdf { background-image:url(mimetypes/pdf.png); }
+.msword { background-image:url(mimetypes/doc.png); }
+.vndms-excel { background-image:url(mimetypes/xls.png); }
+.zip, .x-tar { background-image:url(mimetypes/zip.png); }
+    

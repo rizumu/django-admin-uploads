@@ -1,0 +1,49 @@
+{% extends "admin/base.html" %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{{MEDIA_URL}}/upload_media/upload.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" src="{{MEDIA_URL}}/upload_media/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var ta = parent.document.getElementById('{{textarea_id}}');
+    </script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/upload_media/upload.js"></script>
+    
+{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div id="upload-filter">
+    <a href="/uploads/">All Uploads</a><br />
+    <a href="/uploads/files/">Files</a><br />
+    <a href="/uploads/images">Images</a><br />
+    <br />
+    <hr />
+    <br />
+    <a href="/admin/upload/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);"><img src="/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a><br />
+    <a id="refresh" href="#">Refresh</a>
+</div>
+<ul id="uploads">
+{% for f in files %}
+   <li class="item {{f.content_type}} {{f.sub_type}}">
+       <div class="popup">
+           <a href="#" class="close" title="Close">X</a>
+           <ul>
+            {% if f.is_image %}
+                <li><a class="insert" href="{{f.get_absolute_url}}" title="{{f.title}}">Insert</a></li>
+                <li><a class="insert" href="{{f.get_absolute_url}}" rel="left" title="{{f.title}}">Insert (align left)</a></li>
+                <li><a class="insert" href="{{f.get_absolute_url}}" rel="right" title="{{f.title}}">Insert (align right)</a></li>
+            <li class="link">... and link to:<br /> <input type="text" name="link" value="" class="link" /></li>
+            {% else %}
+            <li><a class="insert" href="{{f.get_absolute_url}}" title="{{f.title}}">Insert Link</a></li>
+            {% endif %}
+            </ul>
+            {# TODO - Clean up this popup #}
+            <a href="/admin/upload/fileupload/{{f.id}}/delete/" class="deletelink" onclick="return showAddAnotherPopup(this);">Delete</a>
+       </div>
+       {{f.title}}<br />
+           <small>{{f.upload_date|date:"F j, Y"}}</small><br />
+           {{f.description}}<br />
+           <img src="{{f.get_absolute_url}}" />
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
