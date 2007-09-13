@@ -12,13 +12,13 @@
 
 {% block content %}
 <div id="upload-filter">
-    <a href="/uploads/">All Uploads</a><br />
-    <a href="/uploads/files/">Files</a><br />
-    <a href="/uploads/images">Images</a><br />
+    <a href="/uploads/?textarea={{textarea_id}}">All Uploads</a><br />
+    <a href="/uploads/files/?textarea={{textarea_id}}">Files</a><br />
+    <a href="/uploads/images/?textarea={{textarea_id}}">Images</a><br />
     <br />
     <hr />
     <br />
-    <a href="/admin/upload/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);"><img src="/media/img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a><br />
+    <a href="/admin/upload/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);"><img src="{{MEDIA_URL}}/upload_media/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a><br />
     <a id="refresh" href="#">Refresh</a>
 </div>
 <ul id="uploads">
