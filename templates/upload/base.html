@@ -42,7 +42,7 @@
        {{f.title}}<br />
            <small>{{f.upload_date|date:"F j, Y"}}</small><br />
            {{f.description}}<br />
-           <img src="{{f.get_absolute_url}}" />
+           {% if f.is_image %}<img src="{{f.get_absolute_url}}" alt="{{f.title}}" />{% endif %}
     </li>
 {% endfor %}
 </ul>
