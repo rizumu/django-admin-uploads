@@ -13,8 +13,6 @@
         .popup input { width:116px; }
         
 #upload-filter { position:fixed; }
-    /* TODO - find refresh icon */
-    #refresh { background:url(refresh.png) no-repeat left center; padding-left:15px; }
         
 /* mimetypes, icons from Nuvola */
 .image, .youtube { background-image:none; background-position:center center; }
