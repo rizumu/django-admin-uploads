@@ -13,6 +13,7 @@ class FileUpload(models.Model):
 
     class Admin:
         list_display = ('title','upload_date','upload', 'mime_type')
+        js = ['%s/upload_media/jquery.js' % (settings.MEDIA_URL), '%s/upload_media/photo-edit.js' % (settings.MEDIA_URL)]
     
     class Meta:
         ordering = ['upload_date', 'title']

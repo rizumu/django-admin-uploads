@@ -1,5 +1,6 @@
 #content { margin:10px 0; }
 #container { min-width:0; }
+#user-tools { display:none; }
 #footer { display:none; }
 
 #uploads { list-style-type:none; padding:0; margin:0 0 0 108px; }
@@ -16,7 +17,7 @@
     #refresh { background:url(refresh.png) no-repeat left center; padding-left:15px; }
         
 /* mimetypes, icons from Nuvola */
-.image { background-image:none; }
+.image, .youtube { background-image:none; background-position:center center; }
 .pdf { background-image:url(mimetypes/pdf.png); }
 .msword { background-image:url(mimetypes/doc.png); }
 .vndms-excel { background-image:url(mimetypes/xls.png); }

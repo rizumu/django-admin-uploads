@@ -38,7 +38,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
     win.close();
 }
 
-function buildTextileImage(image_url, alt_text, align, link) {
+function buildImage(image_url, alt_text, align, link) {
     if (align == 'left')
          textile = ' !<';
      else if (align == 'right')
@@ -51,9 +51,15 @@ function buildTextileImage(image_url, alt_text, align, link) {
      return textile + ' ';
 }
 
-function buildTextileLink(link_url, title) {
+function buildVideoLink(video_url, title) {
+    return '\n\n&& flash_video ' + video_url + ' &&\n\n'; 
+}
+
+function buildLink(link_url, title) {
     return ' "'+title+'":'+link_url+' ';
 }
+
+
 
 $(function(){
     $('#uploads li').click(function(){
@@ -68,10 +74,13 @@ $(function(){
         if ($(this).parents('.image').length) {
             var align = $(this).attr('rel');
             var link = $(this).parents('li').siblings('li.link').children('input.link').val();
-            var code = buildTextileImage(this.href, title, align, link);
+            var code = buildImage(this.href, title, align, link);
+        }
+        else if ($(this).parents('.youtube').length) {
+            var code = buildVideoLink(this.href, title);
         }
         else {
-            var code = buildTextileLink(this.href, title);
+            var code = buildLink(this.href, title);
         }
         insertAtCursor(ta, code);
         $(this).parents('.popup').hide();
