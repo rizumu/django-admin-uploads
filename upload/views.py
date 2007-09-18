@@ -26,8 +26,12 @@ def files(request):
     
 def youtube(request):
     import elementtree.ElementTree as ET
-    user = 'NBC'
-    needs_user_setting = True
+    try:
+        user = settings.YOU_TUBE_USER
+        needs_user_setting = False
+    except AttributeError:
+        user = 'NBC'
+        needs_user_setting = True
     gdata_feed = "http://gdata.youtube.com/feeds/videos?author=%s&orderby=updated" % (user,)
     root = ET.parse(urllib.urlopen(gdata_feed)).getroot()
     videos = []
