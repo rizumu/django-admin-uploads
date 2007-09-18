@@ -26,10 +26,8 @@ def files(request):
     
 def youtube(request):
     import elementtree.ElementTree as ET
-    try:
-        user = settings.YOU_TUBE_USER
-    except AttributeError:
-        return HttpResponse('You need to set YOU_TUBE_USER in your settings file.')
+    user = 'NBC'
+    needs_user_setting = True
     gdata_feed = "http://gdata.youtube.com/feeds/videos?author=%s&orderby=updated" % (user,)
     root = ET.parse(urllib.urlopen(gdata_feed)).getroot()
     videos = []
@@ -43,7 +41,7 @@ def youtube(request):
         video['thumb'] = media.find('{http://search.yahoo.com/mrss/}thumbnail').attrib['url']
         video['url'] = media.find('{http://search.yahoo.com/mrss/}player').attrib['url']
         videos.append(video)
-    return render_to_response('upload/youtube.html', {'videos': videos, 'textarea_id': request.GET['textarea']}, context_instance=RequestContext(request))
+    return render_to_response('upload/youtube.html', {'videos': videos, 'textarea_id': request.GET['textarea'], 'needs_user_setting': needs_user_setting}, context_instance=RequestContext(request))
     
 def download(request):
     if not request.user.is_staff:

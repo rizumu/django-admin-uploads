@@ -38,6 +38,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
     win.close();
 }
 
+//change the following 3 functions to insert HTML, Markdown, whatever
 function buildImage(image_url, alt_text, align, link) {
     if (align == 'left')
          textile = ' !<';
@@ -50,7 +51,7 @@ function buildImage(image_url, alt_text, align, link) {
          textile += ':' + link;
      return textile + ' ';
 }
-
+//this needs some help via a templatetag
 function buildVideoLink(video_url, title) {
     return '\n\n&& flash_video ' + video_url + ' &&\n\n'; 
 }
