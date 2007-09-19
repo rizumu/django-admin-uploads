@@ -39,24 +39,36 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
 }
 
 //change the following 3 functions to insert HTML, Markdown, whatever
-function buildImage(image_url, alt_text, align, link) {
-    if (align == 'left')
-         textile = ' !<';
+function buildImage(image_url, alt_text, align, link, use_html) {
+    textile = ' !';
+    html = '<img ';
+    if (align == 'left') {
+        textile += '<';
+        html += 'class="left" align="left" ';
+    }
      else if (align == 'right')
-         textile = ' !>';
-     else
-         textile = ' !';
+         textile += '>';
+         html += 'class="right" align="right"';
      textile += image_url + '(' + alt_text + ')!';
+     html += 'src="'+image_url+'" alt="'+alt_text+'" />';
      if (link)
          textile += ':' + link;
-     return textile + ' ';
+         html = '<a href="'+link+'">'+html+'</a>';
+    if (use_html)
+        return html + ' ';
+    else
+        return textile + ' ';
 }
 //this needs some help via a templatetag
-function buildVideoLink(video_url, title) {
+function buildVideoLink(video_url, title, thumb, use_html) {
+    if (use_html)
+        return '<a class="flash_video" href="'+video_url+'" title="'+title+'"><img src="'+thumb+'" alt="'+title+'" /></a>';
     return '\n\n&& flash_video ' + video_url + ' &&\n\n'; 
 }
 
-function buildLink(link_url, title) {
+function buildLink(link_url, title, use_html) {
+    if (use_html)
+        return ' <a href="'+link_url+'" title="'+title+'">'+title+'</a> ';
     return ' "'+title+'":'+link_url+' ';
 }
 
@@ -71,19 +83,29 @@ $(function(){
         return false;
     });
     $('.popup .insert').click(function(){
+        if (typeof parent.TinyMCE_Engine == 'function') {
+           var mce_instance = $(ta).siblings('span').attr('id').replace('_parent','');
+           var use_html = true;
+        }
+        else
+            use_html = false;
         var title = $(this).attr('title');
         if ($(this).parents('.image').length) {
             var align = $(this).attr('rel');
             var link = $(this).parents('li').siblings('li.link').children('input.link').val();
-            var code = buildImage(this.href, title, align, link);
+            var code = buildImage(this.href, title, align, link, use_html);
         }
         else if ($(this).parents('.youtube').length) {
-            var code = buildVideoLink(this.href, title);
+            var code = buildVideoLink(this.href, title, this.rel, use_html);
         }
         else {
-            var code = buildLink(this.href, title);
+            var code = buildLink(this.href, title, use_html);
         }
-        insertAtCursor(ta, code);
+        
+        if (typeof parent.TinyMCE_Engine == 'function')
+           parent.tinyMCE.execInstanceCommand(mce_instance ,"mceInsertContent", false, code);
+        else
+            insertAtCursor(ta, code);
         $(this).parents('.popup').hide();
         return false;
     });
