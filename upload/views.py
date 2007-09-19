@@ -47,6 +47,26 @@ def youtube(request):
         videos.append(video)
     return render_to_response('upload/youtube.html', {'videos': videos, 'textarea_id': request.GET['textarea'], 'needs_user_setting': needs_user_setting}, context_instance=RequestContext(request))
     
+def flickr(request):
+    import flickr
+    try:
+        user = settings.FLICKR_USER
+        flickr.API_KEY = settings.FLICKR_API_KEY
+    except AttributeError:
+        return HttpResponse('You need to set <tt>FLICKR_USER</tt> and <tt>FLICKR_API_KEY</tt> in your settings file. <br />&larr; <a href="/uploads/?textarea=%s">Back to all uploads.</a>' % (request.GET['textarea'],))
+    # Get first 12 photos for the user
+    flickr_photos = flickr.people_getPublicPhotos(user, 12, 1)
+    photos = []
+    #this loop is too slow. needs caching or a better library?
+    for f in flickr_photos:
+        photo = {}
+        photo['url'] = f.getURL('Small', 'source')
+        photo['link'] = f.getURL()
+        photo['title'] = f._Photo__title
+        photo['upload_date'] = datetime.datetime.fromtimestamp(float(f._Photo__dateposted))
+        photos.append(photo)
+    return render_to_response('upload/flickr.html', {'photos': photos, 'textarea_id': request.GET['textarea']}, context_instance=RequestContext(request))
+    
 def download(request):
     if not request.user.is_staff:
             return HttpResponseRedirect('/login/?next=%s' % request.path)
