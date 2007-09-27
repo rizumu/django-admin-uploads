@@ -5,7 +5,7 @@ import mimetypes
 
 class FileUpload(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
-    upload = models.FileField(upload_to="media/content")
+    upload = models.FileField(upload_to="uploads")
     title = models.CharField(core=True, maxlength=100)
     description = models.CharField(blank=True, maxlength=200)
     content_type = models.CharField(editable=False, maxlength=100)
