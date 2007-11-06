@@ -19,7 +19,7 @@ if (typeof TinyMCE_Engine=='function') {
 $(function(){
     $('textarea').each(function(){
         //exclude common plain text fields
-        if (this.id != 'id_excerpt' && this.id != 'id_teaser') {
+        if (!this.id.match('excerpt') && !this.id.match('teaser') && !this.id.match('comment')) {
             $(this).after('<iframe style="border:none; width:755px; height:210px;" src="/uploads/?textarea='+this.id+'"></iframe>');
             if (typeof TinyMCE_Engine=='function')
                 tinyMCE.execCommand("mceAddControl", true, this.id); 
