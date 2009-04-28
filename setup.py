@@ -8,16 +8,16 @@ except:
 from upload import get_version
 
 setup(
-    name = 'django-flatblocks',
+    name = 'django-adminuploads',
     version = get_version(),
-    description = 'django-flatblocks acts like django.contrib.flatpages but '
-                  'for parts of a page; like an editable help box you want '
-                  'show alongside the main content.',
+    description = 'File/media browser for Django admin interface. Designed to'
+ 				  'insert images and files into textareas in the admin'
+				  'interface with a simple GUI interface.',
     long_description = open('README.rst').read(),
     keywords = 'django apps',
     license = 'New BSD License',
-    author = 'Horst Gutmann',
-    author_email = 'zerok@zerokspot.com',
+    author = 'Peter Baumgartner',
+    author_email = 'pete@lincolnloop.com',
     url = 'http://github.com/rizumu/django-admin-uploads/',
     dependency_links = [],
     classifiers = [
