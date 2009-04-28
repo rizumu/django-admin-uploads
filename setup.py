@@ -5,11 +5,11 @@ except:
     use_setuptools()
     from setuptools import setup, find_packages
 
-from upload import get_version
+from upload import __version__
 
 setup(
-    name = 'django-adminuploads',
-    version = get_version(),
+    name = 'django-admin-uploads',
+    version = __version__,
     description = 'File/media browser for Django admin interface. Designed to'
  				  'insert images and files into textareas in the admin'
 				  'interface with a simple GUI interface.',

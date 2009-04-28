@@ -1,5 +1,0 @@
-AUTHORS
-LICENSE
-MANIFEST.in
-README.rst
-setup.cfg
