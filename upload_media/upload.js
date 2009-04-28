@@ -12,6 +12,7 @@ function insertAtCursor(myField, myValue) {
         myField.value = myField.value.substring(0, startPos)
         + myValue
         + myField.value.substring(endPos, myField.value.length);
+		wym.insert('something cool');
     } else {
         myField.value += myValue;
     }
@@ -59,6 +60,7 @@ function buildImage(image_url, alt_text, align, link, use_html) {
     else
         return textile + ' ';
 }
+
 //this needs some help via a templatetag
 function buildVideoLink(video_url, title, thumb, use_html) {
     if (use_html)
@@ -71,8 +73,6 @@ function buildLink(link_url, title, use_html) {
         return ' <a href="'+link_url+'" title="'+title+'">'+title+'</a> ';
     return ' "'+title+'":'+link_url+' ';
 }
-
-
 
 $(function(){
     $('#uploads li').click(function(){
@@ -104,6 +104,8 @@ $(function(){
         
         if (typeof parent.TinyMCE_Engine == 'function')
            parent.tinyMCE.execInstanceCommand(mce_instance ,"mceInsertContent", false, code);
+		if (typeof parent.WYMeditor == 'function')
+			alert('DEVO4KA');
         else
             insertAtCursor(ta, code);
         $(this).parents('.popup').hide();

@@ -6,15 +6,11 @@ import mimetypes
 class FileUpload(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
     upload = models.FileField(upload_to="uploads")
-    title = models.CharField(core=True, maxlength=100)
-    description = models.CharField(blank=True, maxlength=200)
-    content_type = models.CharField(editable=False, maxlength=100)
-    sub_type = models.CharField(editable=False, maxlength=100)
+    title = models.CharField(blank=False, max_length=100)
+    description = models.CharField(blank=True, max_length=200)
+    content_type = models.CharField(editable=False, max_length=100)
+    sub_type = models.CharField(editable=False, max_length=100)
 
-    class Admin:
-        list_display = ('title','upload_date','upload', 'mime_type')
-        js = ['%s/upload_media/jquery.js' % (settings.MEDIA_URL), '%s/upload_media/photo-edit.js' % (settings.MEDIA_URL)]
-    
     class Meta:
         ordering = ['upload_date', 'title']
 
@@ -34,7 +30,7 @@ class FileUpload(models.Model):
             return False
     
     def get_absolute_url(self):
-        return '%s/%s' % (settings.MEDIA_URL, self.upload)
+        return '%s%s' % (settings.MEDIA_URL, self.upload)
 
     def save(self):
         file_path = '%s%s' % (settings.MEDIA_ROOT, self.upload)
