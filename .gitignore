@@ -1,0 +1,8 @@
+build
+*.pyc
+*~
+.*.swp
+._*
+*.orig
+.DS_Store
+
