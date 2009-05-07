@@ -1,3 +1,4 @@
+
 function insertAtCursor(myField, myValue) {
     //IE support
     if (document.selection) {
@@ -12,9 +13,8 @@ function insertAtCursor(myField, myValue) {
         myField.value = myField.value.substring(0, startPos)
         + myValue
         + myField.value.substring(endPos, myField.value.length);
-		wym.insert('something cool');
     } else {
-        myField.value += myValue;
+	    myField.value += myValue;
     }
 }
 
