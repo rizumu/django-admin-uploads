@@ -1,17 +1,4 @@
-{% extends "admin/base.html" %}
-{% block extrastyle %}
-    <link rel="stylesheet" href="{{UPLOAD_MEDIA_URL}}upload_media/upload.css" type="text/css" media="screen" charset="utf-8" />
-    <script type="text/javascript" src="{{UPLOAD_MEDIA_URL}}upload_media/jquery.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        var ta = parent.document.getElementById('{{textarea_id}}');
-    </script>
-    <script type="text/javascript" src="{{UPLOAD_MEDIA_URL}}upload_media/upload.js"></script>
-    
-{% endblock %}
-{% block bodyclass %}uploads{% endblock %}
-{% block breadcrumbs %}{% endblock %}
-{% block userlinks %}{% endblock %}
-{% block content %}
+<div id="upload-container">
 <div id="upload-filter">
     <a href="/uploads/?textarea={{textarea_id}}">All Uploads</a><br />
     <a href="/uploads/files/?textarea={{textarea_id}}">Files</a><br />
@@ -24,6 +11,7 @@
     <a href="/admin/upload/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);"><img src="{{UPLOAD_MEDIA_URL}}upload_media/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a><br />
     <a id="refresh" href="#"><img src="{{UPLOAD_MEDIA_URL}}upload_media/icon_refreshlink.gif" /> Refresh</a>
 </div>
+<div>
 <ul id="uploads">
 {% block files %}
 {% for f in files %}
@@ -52,4 +40,5 @@
 {% endfor %}
 {% endblock %}
 </ul>
-{% endblock %}
+</div>
+</div>

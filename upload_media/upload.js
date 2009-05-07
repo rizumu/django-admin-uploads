@@ -14,7 +14,7 @@ function insertAtCursor(myField, myValue) {
         + myValue
         + myField.value.substring(endPos, myField.value.length);
     } else {
-	    myField.value += myValue;
+        myField.value += myValue;
     }
 }
 
@@ -76,21 +76,20 @@ function buildLink(link_url, title, use_html) {
     return ' "'+title+'":'+link_url+' ';
 }
 
-$(function(){
+$(function(){	
     $('#uploads li').click(function(){
         $(this).children('.popup').show();
     });
+
     $('.popup .close').click(function(){
         $(this).parent('.popup').hide();
         return false;
     });
+	
+	// switch between different editors //
+	
     $('.popup .insert').click(function(){
-        if (parent.TinyMCE_Engine !== undefined) {
-           var mce_instance = $(ta).siblings('span').attr('id').replace('_parent','');
-           var use_html = true;
-        } else {
-            use_html = false;
-		}
+        
         var title = $(this).attr('title');
         if ($(this).parents('.image').length) {
             var align = $(this).attr('rel');
@@ -103,15 +102,28 @@ $(function(){
         }
         
         if (parent.TinyMCE_Engine !== undefined) {
-        	parent.tinyMCE.execInstanceCommand(mce_instance ,"mceInsertContent", false, code);
-		} else if (parent.WYMeditor !== undefined) {
-			jQuery.wymeditors(0).insert('something cool');
-		} else {
-        	insertAtCursor(ta, code);
-		}
+            var mce_instance = $(ta).siblings('span').attr('id').replace('_parent','');
+            var use_html = true;
+            tinyMCE.execCommand("mceAddControl", true, this.id);
+        } else if (parent.WYMeditor !== undefined) {
+    		var wym = $.wymeditors(0);
+    		wym.insert(code);
+        } else {
+            alert('using html');
+            use_html = false;
+            insertAtCursor(ta, code);
+        }
         $(this).parents('.popup').hide();
         return false;
     });
+
+
+
+
+	//         if (parent.TinyMCE_Engine !== undefined) {
+	//         	parent.tinyMCE.execInstanceCommand(mce_instance ,"mceInsertContent", false, code);
+	// } else if (parent.WYMeditor !== undefined) {
+
     $('#refresh').click(function(){
         location.reload(true);
         return false;
