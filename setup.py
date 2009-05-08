@@ -5,7 +5,7 @@ except:
     use_setuptools()
     from setuptools import setup, find_packages
 
-from upload import __version__
+from admin_upload import __version__
 
 setup(
     name = 'django-admin-uploads',

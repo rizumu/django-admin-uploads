@@ -14,18 +14,9 @@ Currently, the following features have been written and are working:
 Installation
 ============
 
-#. Add the `uploads` directory to your Python path.
+#. Add the `admin_upload` directory to your Python path.
 
-#. Add the following template context processors to your project's 
-   `settings.py` file:
-
-	``''jwa.context_processors.upload_media',``
-
-   Note: The debug toolbar will only display itself if the mimetype of the
-   response is either `text/html` or `application/xhtml+xml` and contains a
-   closing `</body>` tag.
-
-#. Add `uploads` to your `INSTALLED_APPS` setting so Django can find the
+#. Add `admin_upload` to your `INSTALLED_APPS` setting so Django can find the
    template files associated with the Admin Uploads.
    
    Alternatively, add the path to the admin uploads templates
@@ -44,11 +35,9 @@ Configuration
 The admin uploads app has one setting that needs to be set in `settings.py`:
 
 #. Required: Set the path to the parent folder of upload_media. In addition
-	 to MEDIA_URL, which I use solely for user generated media, I declare a
-	 STATIC_URL for my css, site template images, and javascript in which I
-	 also have a plugins folder:
+	 to MEDIA_URL also have a plugins folder:
 
-   * UPLOAD_MEDIA_URL= STATIC_URL + 'plugins/'
+   * UPLOAD_MEDIA_URL = MEDIA_URL + 'plugins/'
 
 
 TODOs and BUGS

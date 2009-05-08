@@ -9,9 +9,9 @@ django_admin_uploads.egg-info/SOURCES.txt
 django_admin_uploads.egg-info/dependency_links.txt
 django_admin_uploads.egg-info/not-zip-safe
 django_admin_uploads.egg-info/top_level.txt
-upload/__init__.py
-upload/admin.py
-upload/flickr.py
-upload/models.py
-upload/urls.py
-upload/views.py
+admin_upload/__init__.py
+admin_upload/admin.py
+admin_upload/flickr.py
+admin_upload/models.py
+admin_upload/urls.py
+admin_upload/views.py
