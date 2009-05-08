@@ -24,20 +24,32 @@ Installation
 
 #. Create uploads folder in your MEDIA_ROOT
 
-#. Add the following line to the Admin class on any model you would like to 
-	 have uploads available
-   Media():
-	     js = ('/static/upload_media/jquery.js', '/static/upload_media/model.js')
-
 Configuration
 =============
 
-The admin uploads app has one setting that needs to be set in `settings.py`:
+#. Create a forms.py for any model that has a textfield for which you would like to 
+		apply either WYMEditor or WYMEditorUpload (with upload image capability)
 
-#. Required: Set the path to the parent folder of upload_media. In addition
-	 to MEDIA_URL also have a plugins folder:
+		from django import forms
+		from django.db.models import get_model
+		from admin_upload.widgets import WYMEditor, WYMEditorUpload
+		from jwa.portfolio.models import Project, Category
 
-   * UPLOAD_MEDIA_URL = MEDIA_URL + 'plugins/'
+
+		class ProjectAdminModelForm(forms.ModelForm):
+		    full_description = forms.CharField(required=False, widget=WYMEditor())
+		    brief_description = forms.CharField(required=False, widget=WYMEditor())
+		    recent_project_text = forms.CharField(required=False, widget=WYMEditor())
+		    notes = forms.CharField(required=False, widget=WYMEditor())
+
+		    class Meta:
+		        model = get_model('portfolio', 'project')
+
+		class CategoryAdminModelForm(forms.ModelForm):
+		    category_description = forms.CharField(required=False, widget=WYMEditorUpload())
+
+		    class Meta:
+		        model = get_model('portfolio', 'category')
 
 
 TODOs and BUGS
