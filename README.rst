@@ -70,7 +70,11 @@ TODOs and BUGS
 ==============
 #. Test Cross Browser
 #. Test TinyMCE (I've only yet tested WYMeditor)
-#. Test YouTube, Flicker (add setting to chose instances options available)
-#. Add way to manage WYMeditor options
+#. Add setting to choose if Flickr, YouTube, options available
 #. on delete, remove deleted file/image from DOM
 #. get request variable in widgets.py
+#. use image icon on wymeditor & TinyMCEfor uploading? (easier way to use default WYM settings)
+#. Add way to manage WYMeditor & TinyMCE options
+
+BUG
+#. Doen't insert when multiple WYMeditors on same admin.
