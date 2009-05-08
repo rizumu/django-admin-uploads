@@ -1,15 +1,17 @@
 <div id="upload-container">
 <div id="upload-filter">
-    <a href="/uploads/?textarea={{textarea_id}}">All Uploads</a><br />
-    <a href="/uploads/files/?textarea={{textarea_id}}">Files</a><br />
-    <a href="/uploads/images/?textarea={{textarea_id}}">Images</a><br />
-    <!-- <a href="/uploads/youtube/?textarea={{textarea_id}}">You Tube</a><br />
-    <a href="/uploads/flickr/?textarea={{textarea_id}}">Flickr</a><br /> -->
+    <a href="/uploads/?textarea={{textarea_id}}" id="all-uploads">All Uploads</a><br />
+    <a href="/uploads/files/?textarea={{textarea_id}}" id="files">Files</a><br />
+    <a href="/uploads/images/?textarea={{textarea_id}}" id="images">Images</a><br />
+    <a href="/uploads/youtube/?textarea={{textarea_id}}">You Tube</a><br />
+    <a href="/uploads/flickr/?textarea={{textarea_id}}">Flickr</a><br />
     <br />
     <hr />
     <br />
-    <a href="/admin/upload/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);"><img src="{{UPLOAD_MEDIA_URL}}upload_media/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a><br />
-    <a id="refresh" href="#"><img src="{{UPLOAD_MEDIA_URL}}upload_media/icon_refreshlink.gif" /> Refresh</a>
+    <a href="/admin/upload/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);">
+			<!-- TODO - Figure out {{ MEDIA_URL }} context process isn't working -->
+			<img src="{{ MEDIA_URL }}upload_media/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a>
+		<br />
 </div>
 <div>
 <ul id="uploads">

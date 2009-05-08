@@ -55,10 +55,10 @@ function buildImage(image_url, alt_text, align, link, use_html) {
     if (link) 
         textile += ':' + link;
         html = '<a href="'+link+'">'+html+'</a>';
-    // if (use_html)
+    if (use_html)
         return html + ' ';
-    // else
-    //     return textile + ' ';
+    else
+        return textile + ' ';
 }
 
 //this needs some help via a templatetag
@@ -71,12 +71,28 @@ function buildVideoLink(video_url, title, thumb, use_html) {
 
 function buildLink(link_url, title, use_html) {
     if (use_html) {
-        return ' <a href="'+link_url+'" title="'+title+'">'+title+'</a> ';
-	}
-    return ' "'+title+'":'+link_url+' ';
+        return ' <a href="'+link_url+'" title="'+title+'" class="image">'+title+'</a> ';
+	} else {
+        return ' "'+title+'":'+link_url+' ';
+    }
 }
 
-$(function(){	
+function buildCode(self, use_html) {
+    var title = self.attr('title');
+    if (self.parents('.image').length) {
+        var align = self.attr('rel');
+        var link = self.parents('li').siblings('li.link').children('input.link').val();
+        var code = buildImage(self.attr('href'), title, align, link, use_html);
+    } else if (self.parents('.youtube').length) {
+        var code = buildVideoLink(self.attr('href'), title, self.attr('rel'), use_html);
+    } else {
+        var code = buildLink(self.attr('href'), title, use_html);
+    }
+    return code;
+}
+
+$(function(){
+
     $('#uploads li').click(function(){
         $(this).children('.popup').show();
     });
@@ -87,31 +103,17 @@ $(function(){
     });
 	
 	// switch between different editors //
-	
     $('.popup .insert').click(function(){
-        
-        var title = $(this).attr('title');
-        if ($(this).parents('.image').length) {
-            var align = $(this).attr('rel');
-            var link = $(this).parents('li').siblings('li.link').children('input.link').val();
-            var code = buildImage(this.href, title, align, link, use_html);
-        } else if ($(this).parents('.youtube').length) {
-            var code = buildVideoLink(this.href, title, this.rel, use_html);
-        } else {
-            var code = buildLink(this.href, title, use_html);
-        }
-        
+        var use_html = true;
         if (parent.TinyMCE_Engine !== undefined) {
             var mce_instance = $(ta).siblings('span').attr('id').replace('_parent','');
-            var use_html = true;
             tinyMCE.execCommand("mceAddControl", true, this.id);
         } else if (parent.WYMeditor !== undefined) {
     		var wym = $.wymeditors(0);
-    		wym.insert(code);
+    		wym.insert(buildCode($(this), use_html));
         } else {
-            alert('using html');
             use_html = false;
-            insertAtCursor(ta, code);
+            insertAtCursor(ta, buildCode($(this), use_html));
         }
         $(this).parents('.popup').hide();
         return false;
@@ -124,8 +126,21 @@ $(function(){
 	//         	parent.tinyMCE.execInstanceCommand(mce_instance ,"mceInsertContent", false, code);
 	// } else if (parent.WYMeditor !== undefined) {
 
-    $('#refresh').click(function(){
-        location.reload(true);
+    $('#all-uploads').click(function(){
+        $('.image').show()
+        $('.flash_video').show()
+        return false;
+    });
+    
+    $('#images').click(function(){
+        $('.flash_video').hide()
+        $('.image').show()
+        return false;
+    });
+        
+    $('#files').click(function(){
+        $('.flash_video').show()
+        $('.image').hide()
         return false;
     });
 });
