@@ -109,8 +109,8 @@ $(function(){
             var mce_instance = $(ta).siblings('span').attr('id').replace('_parent','');
             tinyMCE.execCommand("mceAddControl", true, this.id);
         } else if (parent.WYMeditor !== undefined) {
-    		var wym = $.wymeditors(0);
-    		wym.insert(buildCode($(this), use_html));
+            var wym = $.wymeditors(0);
+            wym.insert(buildCode($(this), use_html));
         } else {
             use_html = false;
             insertAtCursor(ta, buildCode($(this), use_html));
