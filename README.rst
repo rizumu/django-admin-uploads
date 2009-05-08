@@ -8,7 +8,7 @@ files into textareas in the admin interface with a simple GUI interface.
 Currently, the following features have been written and are working:
 
 - Django 1.1 support
-- TinyMCE support
+- TinyMCE support (probably but not sure, still need to test)
 - WYMeditor support
 
 Installation
@@ -32,8 +32,7 @@ WYMeditor integration process in Django:
 http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/ 
 
 
-#. Create a forms.py for any model that has a textfield for which you would like to
-   apply either WYMEditor or WYMEditorUpload (with upload image capability)
+#. Create a forms.py for any model that has a textfield for which you would like to apply either WYMEditor or WYMEditorUpload (with upload image capability)
 
 
 		from django import forms
@@ -49,8 +48,7 @@ http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
 		        model = get_model('news', 'newsentry')
 
 
-#. In your admin.py, import your form class, and register the model with the 
-   admin using get_model to avoid extra imports.
+#. In your admin.py, import your form class, and register the model with the admin using get_model to avoid extra imports.
 
 
 		from django.contrib import admin
