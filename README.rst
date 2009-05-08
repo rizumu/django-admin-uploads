@@ -27,31 +27,52 @@ Installation
 Configuration
 =============
 
+See Janis Leidel's blogpost for more comprehensive instructions on the
+WYMeditor integration process in Django:
+http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/ 
+
+
 #. Create a forms.py for any model that has a textfield for which you would like to 
 		apply either WYMEditor or WYMEditorUpload (with upload image capability)
+
 
 		from django import forms
 		from django.db.models import get_model
 		from admin_upload.widgets import WYMEditor, WYMEditorUpload
-		from jwa.portfolio.models import Project, Category
+		from jwa.news.models import NewsEntry
 
-
-		class ProjectAdminModelForm(forms.ModelForm):
-		    full_description = forms.CharField(required=False, widget=WYMEditor())
-		    brief_description = forms.CharField(required=False, widget=WYMEditor())
-		    recent_project_text = forms.CharField(required=False, widget=WYMEditor())
+		class NewsEntryAdminModelForm(forms.ModelForm):
+		    body = forms.CharField(required=False, widget=WYMEditorUpload())
 		    notes = forms.CharField(required=False, widget=WYMEditor())
 
 		    class Meta:
-		        model = get_model('portfolio', 'project')
+		        model = get_model('news', 'newsentry')
+		
 
-		class CategoryAdminModelForm(forms.ModelForm):
-		    category_description = forms.CharField(required=False, widget=WYMEditorUpload())
+#. In your admin.py, import your form class, and register the model with the 
+	admin using get_model to avoid extra imports.
 
-		    class Meta:
-		        model = get_model('portfolio', 'category')
+
+		from django.contrib import admin
+		from django.db.models import get_model
+		from myapp.news.models import NewsEntry
+		from myapp.news.forms import NewsEntryAdminModelForm
+
+
+		class NewsEntryAdmin(admin.ModelAdmin):
+		    form = NewsEntryAdminModelForm
+		    list_display = ( 'title', 'status', 'on_sites')
+		    prepopulated_fields = {'slug': ('title',)}
+
+		admin.site.register(get_model('news', 'newsentry'), NewsEntryAdmin)
+
 
 
 TODOs and BUGS
 ==============
-See: http://nothinghere.yet
+#. Test Cross Browser
+#. Test TinyMCE (I've only yet tested WYMeditor)
+#. Test YouTube, Flicker (add setting to chose instances options available)
+#. Add way to manage WYMeditor options
+#. on delete, remove deleted file/image from DOM
+#. get request variable in widgets.py
