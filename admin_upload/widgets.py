@@ -59,5 +59,6 @@ class WYMEditorUpload(forms.Textarea):
             });
             </script>''' % (id, self.language))
         files = FileUpload.objects.all().order_by('-upload_date')
-        admin_upload_html = render_to_string('admin_upload/base.html', {'files': files, 'textarea_id': id })
+        admin_upload_html = render_to_string('admin_upload/base.html', 
+            {'files': files, 'textarea_id': id, 'MEDIA_URL': settings.MEDIA_URL })
         return rendered + wymeditor + admin_upload_html
