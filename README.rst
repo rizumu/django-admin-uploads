@@ -32,8 +32,8 @@ WYMeditor integration process in Django:
 http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/ 
 
 
-#. Create a forms.py for any model that has a textfield for which you would like to 
-		apply either WYMEditor or WYMEditorUpload (with upload image capability)
+#. Create a forms.py for any model that has a textfield for which you would like to
+   apply either WYMEditor or WYMEditorUpload (with upload image capability)
 
 
 		from django import forms
@@ -47,10 +47,10 @@ http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
 
 		    class Meta:
 		        model = get_model('news', 'newsentry')
-		
+
 
 #. In your admin.py, import your form class, and register the model with the 
-	admin using get_model to avoid extra imports.
+   admin using get_model to avoid extra imports.
 
 
 		from django.contrib import admin
