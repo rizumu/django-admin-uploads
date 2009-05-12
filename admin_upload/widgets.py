@@ -11,7 +11,7 @@ class WYMEditor(forms.Textarea):
             settings.MEDIA_URL + 'admin_upload_media/wymeditor/jquery.wymeditor.pack.js',
         )
         css = {
-           'all': (settings.MEDIA_URL + 'admin_upload_media/image-override.css',)
+           'all': (settings.MEDIA_URL + 'admin_upload_media/wymeditor-override.css',)
         }
 
     def __init__(self, language=None, attrs=None):
@@ -42,7 +42,7 @@ class WYMEditorUpload(forms.Textarea):
         )
         css = {
            'all': (settings.MEDIA_URL + 'admin_upload_media/upload.css',
-                   settings.MEDIA_URL + 'admin_upload_media/image-override.css',)
+                   settings.MEDIA_URL + 'admin_upload_media/wymeditor-override.css',)
         }
 
     def __init__(self, language=None, attrs=None):
