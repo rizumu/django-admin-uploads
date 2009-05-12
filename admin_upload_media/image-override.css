@@ -1,0 +1,4 @@
+/* hide wymeditor image upload field */
+.wym_skin_default .wym_buttons li.wym_tools_image a {
+    display: none;
+}

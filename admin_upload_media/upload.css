@@ -19,11 +19,10 @@
         .popup input { width:116px; }
         
 #upload-filter { float: left; }
-        
+
 /* mimetypes, icons from Nuvola */
 .image, .youtube { background-image:none; background-position:center center; }
 .pdf { background-image:url(mimetypes/pdf.png); }
 .msword { background-image:url(mimetypes/doc.png); }
 .vndms-excel { background-image:url(mimetypes/xls.png); }
 .zip, .x-tar { background-image:url(mimetypes/zip.png); }
-    
