@@ -11,8 +11,8 @@ setup(
     name = 'django-admin-uploads',
     version = __version__,
     description = 'File/media browser for Django admin interface. Designed to'
- 				  'insert images and files into textareas in the admin'
-				  'interface with a simple GUI interface.',
+                  'insert images and files into textareas in the admin'
+                  'interface with a simple GUI interface.',
     long_description = open('README.rst').read(),
     keywords = 'django apps',
     license = 'New BSD License',

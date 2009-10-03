@@ -16,24 +16,15 @@ Description: ====================
         Currently, the following features have been written and are working:
         
         - Django 1.1 support
-        - TinyMCE support
+        - TinyMCE support (probably but not sure, still need to test)
         - WYMeditor support
         
         Installation
         ============
         
-        #. Add the `uploads` directory to your Python path.
+        #. Add the `admin_upload` directory to your Python path.
         
-        #. Add the following template context processors to your project's
-        `settings.py` file:
-        
-        ``''jwa.context_processors.upload_media',``
-        
-        Note: The debug toolbar will only display itself if the mimetype of the
-        response is either `text/html` or `application/xhtml+xml` and contains a
-        closing `</body>` tag.
-        
-        #. Add `uploads` to your `INSTALLED_APPS` setting so Django can find the
+        #. Add `admin_upload` to your `INSTALLED_APPS` setting so Django can find the
         template files associated with the Admin Uploads.
         
         Alternatively, add the path to the admin uploads templates
@@ -41,27 +32,60 @@ Description: ====================
         
         #. Create uploads folder in your MEDIA_ROOT
         
-        #. Add the following line to the Admin class on any model you would like to
-        have uploads available
-        Media():
-        js = ('/static/upload_media/jquery.js', '/static/upload_media/model.js')
-        
         Configuration
         =============
         
-        The admin uploads app has one setting that needs to be set in `settings.py`:
+        See Janis Leidel's blogpost for more comprehensive instructions on the
+        WYMeditor integration process in Django:
+        http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
         
-        #. Required: Set the path to the parent folder of upload_media. In addition
-        to MEDIA_URL, which I use solely for user generated media, I declare a
-        STATIC_URL for my css, site template images, and javascript in which I
-        also have a plugins folder:
         
-        * UPLOAD_MEDIA_URL= STATIC_URL + 'plugins/'
+        #. Create a forms.py for any model that has a textfield for which you would like to apply either WYMEditor or WYMEditorUpload (with upload image capability)
+        
+        
+        from django import forms
+        from django.db.models import get_model
+        from admin_upload.widgets import WYMEditor, WYMEditorUpload
+        from jwa.news.models import NewsEntry
+        
+        class NewsEntryAdminModelForm(forms.ModelForm):
+        body = forms.CharField(required=False, widget=WYMEditorUpload())
+        notes = forms.CharField(required=False, widget=WYMEditor())
+        
+        class Meta:
+        model = get_model('news', 'newsentry')
+        
+        
+        #. In your admin.py, import your form class, and register the model with the admin using get_model to avoid extra imports.
+        
+        
+        from django.contrib import admin
+        from django.db.models import get_model
+        from myapp.news.models import NewsEntry
+        from myapp.news.forms import NewsEntryAdminModelForm
+        
+        
+        class NewsEntryAdmin(admin.ModelAdmin):
+        form = NewsEntryAdminModelForm
+        list_display = ( 'title', 'status', 'on_sites')
+        prepopulated_fields = {'slug': ('title',)}
+        
+        admin.site.register(get_model('news', 'newsentry'), NewsEntryAdmin)
+        
         
         
         TODOs and BUGS
         ==============
-        See: http://nothinghere.yet
+        #. Test Cross Browser
+        #. Test TinyMCE (I've only yet tested WYMeditor)
+        #. Add setting to choose if Flickr, YouTube, options available
+        #. on delete, remove deleted file/image from DOM
+        #. get request variable in widgets.py
+        #. use image icon on wymeditor & TinyMCEfor uploading? (easier way to use default WYM settings)
+        #. Add way to manage WYMeditor & TinyMCE options
+        
+        BUG
+        #. Doen't insert when multiple WYMeditors on same admin.
         
 Keywords: django apps
 Platform: UNKNOWN
