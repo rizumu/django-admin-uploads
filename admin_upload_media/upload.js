@@ -49,7 +49,7 @@ function buildImage(image_url, alt_text, align, link, use_html) {
     } else if (align == 'right') {
          textile += '>';
          html += 'class="right" align="right"';
-	}
+  }
     textile += image_url + '(' + alt_text + ')!';
     html += 'src="'+image_url+'" alt="'+alt_text+'" />';
     if (link) 
@@ -66,13 +66,13 @@ function buildVideoLink(video_url, title, thumb, use_html) {
     if (use_html) {
         return '<a class="flash_video" href="'+video_url+'" title="'+title+'"><img src="'+thumb+'" alt="'+title+'" /></a>';
     }
-	return '\n\n&& flash_video ' + video_url + ' &&\n\n'; 
+  return '\n\n&& flash_video ' + video_url + ' &&\n\n'; 
 }
 
 function buildLink(link_url, title, use_html) {
     if (use_html) {
         return ' <a href="'+link_url+'" title="'+title+'" class="image">'+title+'</a> ';
-	} else {
+  } else {
         return ' "'+title+'":'+link_url+' ';
     }
 }
@@ -101,8 +101,8 @@ $(function(){
         $(this).parent('.popup').hide();
         return false;
     });
-	
-	// switch between different editors //
+  
+  // switch between different editors //
     $('.popup .insert').click(function(){
         var use_html = true;
         if (parent.TinyMCE_Engine !== undefined) {
@@ -122,9 +122,9 @@ $(function(){
 
 
 
-	//         if (parent.TinyMCE_Engine !== undefined) {
-	//         	parent.tinyMCE.execInstanceCommand(mce_instance ,"mceInsertContent", false, code);
-	// } else if (parent.WYMeditor !== undefined) {
+  //         if (parent.TinyMCE_Engine !== undefined) {
+  //          parent.tinyMCE.execInstanceCommand(mce_instance ,"mceInsertContent", false, code);
+  // } else if (parent.WYMeditor !== undefined) {
 
     $('#all-uploads').click(function(){
         $('.image').show()

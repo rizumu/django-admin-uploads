@@ -35,34 +35,34 @@ http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
 #. Create a forms.py for any model that has a textfield for which you would like to apply either WYMEditor or WYMEditorUpload (with upload image capability)
 
 
-		from django import forms
-		from django.db.models import get_model
-		from admin_upload.widgets import WYMEditor, WYMEditorUpload
-		from jwa.news.models import NewsEntry
+        from django import forms
+        from django.db.models import get_model
+        from admin_upload.widgets import WYMEditor, WYMEditorUpload
+        from jwa.news.models import NewsEntry
 
-		class NewsEntryAdminModelForm(forms.ModelForm):
-		    body = forms.CharField(required=False, widget=WYMEditorUpload())
-		    notes = forms.CharField(required=False, widget=WYMEditor())
+        class NewsEntryAdminModelForm(forms.ModelForm):
+            body = forms.CharField(required=False, widget=WYMEditorUpload())
+            notes = forms.CharField(required=False, widget=WYMEditor())
 
-		    class Meta:
-		        model = get_model('news', 'newsentry')
+            class Meta:
+                model = get_model('news', 'newsentry')
 
 
 #. In your admin.py, import your form class, and register the model with the admin using get_model to avoid extra imports.
 
 
-		from django.contrib import admin
-		from django.db.models import get_model
-		from myapp.news.models import NewsEntry
-		from myapp.news.forms import NewsEntryAdminModelForm
+        from django.contrib import admin
+        from django.db.models import get_model
+        from myapp.news.models import NewsEntry
+        from myapp.news.forms import NewsEntryAdminModelForm
 
 
-		class NewsEntryAdmin(admin.ModelAdmin):
-		    form = NewsEntryAdminModelForm
-		    list_display = ( 'title', 'status', 'on_sites')
-		    prepopulated_fields = {'slug': ('title',)}
+        class NewsEntryAdmin(admin.ModelAdmin):
+            form = NewsEntryAdminModelForm
+            list_display = ( 'title', 'status', 'on_sites')
+            prepopulated_fields = {'slug': ('title',)}
 
-		admin.site.register(get_model('news', 'newsentry'), NewsEntryAdmin)
+        admin.site.register(get_model('news', 'newsentry'), NewsEntryAdmin)
 
 
 

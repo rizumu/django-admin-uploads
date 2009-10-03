@@ -5,7 +5,7 @@
 #upload-container {
     margin: 10px 0 0 10px;
     height: 150px;
-    width:500px; 
+    width:500px;
 }
 
 #uploads { list-style-type:none; padding:0; float: right; width: 200px;}

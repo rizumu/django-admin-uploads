@@ -8,10 +8,10 @@
 //        plugins : 'inlinepopups, paste',
 //        button_tile_map : true,
 //        fix_list_elements : true,
-//    	   gecko_spellcheck : true,
-//    	   verify_html : true,
-//    	   dialog_type : "modal",
-//    	   height : '300',
+//         gecko_spellcheck : true,
+//         verify_html : true,
+//         dialog_type : "modal",
+//         height : '300',
 //        mode : 'none' 
 //     });
 // }
@@ -23,7 +23,7 @@
 // 
 // 
 // 
-// 	
+//  
 //             $(this).after('<iframe frameborder="0" style="border:none; width:755px; height:210px;" src="/uploads/?textarea='+this.id+'"></iframe>');
 // 
 // 

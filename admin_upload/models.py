@@ -1,7 +1,7 @@
+import mimetypes
 from django.db import models
 from django.conf import settings
 from django.template.defaultfilters import slugify
-import mimetypes
 
 class FileUpload(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
