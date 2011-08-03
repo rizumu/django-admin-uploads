@@ -7,9 +7,9 @@ files into textareas in the admin interface with a simple GUI interface.
 
 Currently, the following features have been written and are working:
 
-- Django 1.1 support
+- Django 1.3 support
+- WYMeditor 0.5 rc2 bundled
 - TinyMCE support (probably but not sure, still need to test)
-- WYMeditor support
 
 Installation
 ============
@@ -17,12 +17,10 @@ Installation
 #. Add the `admin_upload` directory to your Python path.
 
 #. Add `admin_upload` to your `INSTALLED_APPS` setting so Django can find the
-   template files associated with the Admin Uploads.
+   template files and staticfiles associated with the Admin Uploads application.
 
-   Alternatively, add the path to the admin uploads templates
-   (``'path/to/django_admin_uploads/templates'`` to your ``TEMPLATE_DIRS`` setting.)
-
-#. Create uploads folder in your MEDIA_ROOT
+#. Create an empty uploads folder in your MEDIA_ROOT where images will
+ be saved.
 
 Configuration
 =============
@@ -32,39 +30,40 @@ WYMeditor integration process in Django:
 http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
 
 
-#. Create a forms.py for any model that has a textfield for which you would like to apply either WYMEditor or WYMEditorUpload (with upload image capability)::
+#. Create a admin.py for any model that has a textfield for which you
+would like to apply either WYMEditor or WYMEditorUpload (with upload
+image capability). Then import your form class, and register the model
+with the admin using get_model to avoid extra imports::
+
+    from django import forms
+    from django.db.models import get_model
+
+    from django.contrib import admin
+
+    from admin_upload.widgets import WYMEditor, WYMEditorUpload
+
+    from my_news_app.models import NewsEntry
 
 
-        from django import forms
-        from django.db.models import get_model
-        from admin_upload.widgets import WYMEditor, WYMEditorUpload
+    class NewsEntryAdminModelForm(forms.ModelForm):
+        body = forms.CharField(required=False, widget=WYMEditorUpload())
+        notes = forms.CharField(required=False, widget=WYMEditor())
 
-        class NewsEntryAdminModelForm(forms.ModelForm):
-            body = forms.CharField(required=False, widget=WYMEditorUpload())
-            notes = forms.CharField(required=False, widget=WYMEditor())
-
-            class Meta:
-                model = get_model("news", "newsentry")
+        class Meta:
+            model = NewsEntry
 
 
-#. In your admin.py, import your form class, and register the model with the admin using get_model to avoid extra imports::
+    class NewsEntryAdmin(admin.ModelAdmin):
+        form = NewsEntryAdminModelForm
+        list_display = ( "title", "status", "on_sites")
+        prepopulated_fields = {"slug": ("title",)}
 
 
-        from django.contrib import admin
-        from django.db.models import get_model
+    admin.site.register(NewsEntry, NewsEntryAdmin)
 
 
-        class NewsEntryAdmin(admin.ModelAdmin):
-            form = NewsEntryAdminModelForm
-            list_display = ( "title", "status", "on_sites")
-            prepopulated_fields = {"slug": ("title",)}
-
-        admin.site.register(get_model("news", "newsentry"), NewsEntryAdmin)
-
-
-
-TODOs and BUGS
-==============
+TODOs and BUGS (out of date)
+============================
 #. Test Cross Browser
 #. Test TinyMCE (I've only yet tested WYMeditor)
 #. Add setting to choose if Flickr, YouTube, options available
