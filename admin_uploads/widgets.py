@@ -15,6 +15,7 @@ class WYMEditor(forms.Textarea):
             settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.mozilla.js",
             settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.opera.js",
             settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.safari.js",
+            settings.STATIC_URL + "admin_uploads/wymeditor/plugins/embed/jquery.wymeditor.embed.js",
         )
         css = {
            "all": (settings.STATIC_URL + "admin_uploads/wymeditor-override.css",)
@@ -49,6 +50,7 @@ class WYMEditorUpload(forms.Textarea):
             settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.mozilla.js",
             settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.opera.js",
             settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.safari.js",
+            settings.STATIC_URL + "admin_uploads/wymeditor/plugins/embed/jquery.wymeditor.embed.js",
             settings.STATIC_URL + "admin_uploads/upload.js"
         )
         css = {
