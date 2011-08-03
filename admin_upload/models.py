@@ -12,32 +12,32 @@ class FileUpload(models.Model):
     sub_type = models.CharField(editable=False, max_length=100)
 
     class Meta:
-        ordering = ['upload_date', 'title']
+        ordering = ["upload_date", "title"]
 
     def __unicode__(self):
         return self.title
-    
+
     def mime_type(self):
-        return '%s/%s' % (self.content_type, self.sub_type)
-    
+        return "%s/%s" % (self.content_type, self.sub_type)
+
     def type_slug(self):
         return slugify(self.sub_type)
-    
+
     def is_image(self):
-        if self.content_type == 'image':
+        if self.content_type == "image":
             return True
         else:
             return False
-    
+
     def get_absolute_url(self):
-        return '%s%s' % (settings.MEDIA_URL, self.upload)
+        return "%s%s" % (settings.STATIC_URL, self.upload)
 
     def save(self):
-        file_path = '%s%s' % (settings.MEDIA_ROOT, self.upload)
+        file_path = "%s%s" % (settings.STATIC_ROOT, self.upload)
         (mime_type, encoding) = mimetypes.guess_type(file_path)
         try:
-            [self.content_type, self.sub_type] = mime_type.split('/')
+            [self.content_type, self.sub_type] = mime_type.split("/")
         except:
-            self.content_type = 'text'
-            self.sub_type = 'plain'
+            self.content_type = "text"
+            self.sub_type = "plain"
         super(FileUpload, self).save()
