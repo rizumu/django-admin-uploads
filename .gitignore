@@ -1,4 +1,10 @@
 build
+dist
+MANIFEST
+*.pyc
+*.egg-info
+*.egg
+docs/_build/
 *.pyc
 *~
 .*.swp

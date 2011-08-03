@@ -14,14 +14,14 @@ def all(request):
     if not request.user.is_staff:
         raise Http404
     files = FileUpload.objects.all().order_by("-upload_date")
-    return render_to_response("admin_upload/base.html", {"files": files, "textarea_id": request.GET["textarea"]}, context_instance=RequestContext(request))
+    return render_to_response("admin_uploads/base.html", {"files": files, "textarea_id": request.GET["textarea"]}, context_instance=RequestContext(request))
 
 
 def images(request):
     if not request.user.is_staff:
         raise Http404
     files = FileUpload.objects.filter(content_type = "image").order_by("-upload_date")
-    return render_to_response("admin_upload/base.html", {"files": files, "textarea_id": request.GET["textarea"]}, context_instance=RequestContext(request))
+    return render_to_response("admin_uploads/base.html", {"files": files, "textarea_id": request.GET["textarea"]}, context_instance=RequestContext(request))
 
 
 def files(request):
@@ -29,7 +29,7 @@ def files(request):
         raise Http404
     not_files = ["video", "image"]
     files = FileUpload.objects.exclude(content_type__in = not_files).order_by("-upload_date")
-    return render_to_response("admin_upload/base.html", {"files": files, "textarea_id": request.GET["textarea"]}, context_instance=RequestContext(request))
+    return render_to_response("admin_uploads/base.html", {"files": files, "textarea_id": request.GET["textarea"]}, context_instance=RequestContext(request))
 
 
 def youtube(request):

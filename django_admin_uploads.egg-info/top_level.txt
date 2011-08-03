@@ -1,1 +1,1 @@
-admin_upload
+admin_uploads

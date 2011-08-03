@@ -8,8 +8,8 @@
     <br />
     <hr />
     <br />
-    <a href="/admin/admin_upload/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);">
-            <img src="{{ STATIC_URL }}/admin_upload/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a>
+    <a href="/admin/admin_uploads/fileupload/add/" class="add-another" id="add_id_uploads" onclick="return showAddAnotherPopup(this);">
+            <img src="{{ STATIC_URL }}/admin_uploads/icon_addlink.gif" width="10" height="10" alt="Add Another"/> Upload</a>
         <br />
 </div>
 <div>
@@ -31,7 +31,7 @@
             {% endif %}
             </ul>
             {# TODO - Clean up this popup #}
-            <a href="/admin/admin_upload/fileupload/{{f.id}}/delete/" class="deletelink" onclick="return showAddAnotherPopup(this);">Delete</a>
+            <a href="/admin/admin_uploads/fileupload/{{f.id}}/delete/" class="deletelink" onclick="return showAddAnotherPopup(this);">Delete</a>
        </div>
        <div class="upload-title">{{f.title}}<br />
            <small>{{f.upload_date|date:"F j, Y"}}</small><br />

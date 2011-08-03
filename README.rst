@@ -15,8 +15,8 @@ Currently, the following features have been written and are working:
 Installation
 ============
 
-#. Add the `admin_upload` directory to your Python path.
-#. Add `admin_upload` to your `INSTALLED_APPS` setting so Django can find the template files and staticfiles associated with the Admin Uploads application.
+#. Add the `admin_uploads` directory to your Python path.
+#. Add `admin_uploads` to your `INSTALLED_APPS` setting so Django can find the template files and staticfiles associated with the Admin Uploads application.
 #. Create an empty uploads folder in your MEDIA_ROOT where images will be saved.
 #. Make sure you are using Django 1.3 convention of STATIC_ROOT/STATIC_URL for staticfiles and MEDIA_ROOT/MEDIA_URL for user generated content.
 
@@ -34,7 +34,7 @@ http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
 
     from django.contrib import admin
 
-    from admin_upload.widgets import WYMEditor, WYMEditorUpload
+    from admin_uploads.widgets import WYMEditor, WYMEditorUpload
 
     from my_news_app.models import NewsEntry
 

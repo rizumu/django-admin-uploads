@@ -3,18 +3,18 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 
-from admin_upload.models import FileUpload
+from admin_uploads.models import FileUpload
 
 
 class WYMEditor(forms.Textarea):
 
     class Media:
         js = (
-            settings.STATIC_URL + "admin_upload/jquery.js",
-            settings.STATIC_URL + "admin_upload/wymeditor/jquery.wymeditor.pack.js",
+            settings.STATIC_URL + "admin_uploads/jquery.js",
+            settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.pack.js",
         )
         css = {
-           "all": (settings.STATIC_URL + "admin_upload/wymeditor-override.css",)
+           "all": (settings.STATIC_URL + "admin_uploads/wymeditor-override.css",)
         }
 
     def __init__(self, language=None, attrs=None):
@@ -41,13 +41,13 @@ class WYMEditorUpload(forms.Textarea):
 
     class Media:
         js = (
-            settings.STATIC_URL + "admin_upload/jquery.js",
-            settings.STATIC_URL + "admin_upload/wymeditor/jquery.wymeditor.pack.js",
-            settings.STATIC_URL + "admin_upload/upload.js"
+            settings.STATIC_URL + "admin_uploads/jquery.js",
+            settings.STATIC_URL + "admin_uploads/wymeditor/jquery.wymeditor.pack.js",
+            settings.STATIC_URL + "admin_uploads/upload.js"
         )
         css = {
-           "all": (settings.STATIC_URL + "admin_upload/upload.css",
-                   settings.STATIC_URL + "admin_upload/wymeditor-override.css",)
+           "all": (settings.STATIC_URL + "admin_uploads/upload.css",
+                   settings.STATIC_URL + "admin_uploads/wymeditor-override.css",)
         }
 
     def __init__(self, language=None, attrs=None):
@@ -68,6 +68,6 @@ class WYMEditorUpload(forms.Textarea):
             });
             </script>""" % (id, self.language))
         files = FileUpload.objects.all().order_by("-upload_date")
-        admin_upload_html = render_to_string("admin_upload/base.html",
+        admin_uploads_html = render_to_string("admin_uploads/base.html",
             {"files": files, "textarea_id": id, "STATIC_URL": settings.STATIC_URL })
-        return rendered + wymeditor + admin_upload_html
+        return rendered + wymeditor + admin_uploads_html
