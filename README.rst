@@ -2,8 +2,9 @@
 Django Admin Uploads
 ====================
 
-File/media browser for Django admin interface. Designed to insert images and
-files into textareas in the admin interface with a simple GUI interface.
+File/media browser for Django admin interface. Designed to insert
+images and files into textareas in the admin interface with a simple
+GUI interface.
 
 Currently, the following features have been written and are working:
 
@@ -16,8 +17,9 @@ Installation
 
 #. Add the `admin_upload` directory to your Python path.
 
-#. Add `admin_upload` to your `INSTALLED_APPS` setting so Django can find the
-   template files and staticfiles associated with the Admin Uploads application.
+#. Add `admin_upload` to your `INSTALLED_APPS` setting so Django can
+find the template files and staticfiles associated with the Admin
+Uploads application.
 
 #. Create an empty uploads folder in your MEDIA_ROOT where images will
  be saved.
@@ -32,8 +34,8 @@ http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
 
 #. Create a admin.py for any model that has a textfield for which you
 would like to apply either WYMEditor or WYMEditorUpload (with upload
-image capability). Then import your form class, and register the model
-with the admin using get_model to avoid extra imports::
+image capability). Then set the form in your Admin class, and register the model
+with the admin::
 
     from django import forms
     from django.db.models import get_model
