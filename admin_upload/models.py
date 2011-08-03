@@ -3,6 +3,7 @@ from django.db import models
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+
 class FileUpload(models.Model):
     upload_date = models.DateTimeField(auto_now_add=True)
     upload = models.FileField(upload_to="uploads")
@@ -30,10 +31,10 @@ class FileUpload(models.Model):
             return False
 
     def get_absolute_url(self):
-        return "%s%s" % (settings.STATIC_URL, self.upload)
+        return "%s%s" % (settings.MEDIA_URL, self.upload)
 
     def save(self):
-        file_path = "%s%s" % (settings.STATIC_ROOT, self.upload)
+        file_path = "%s%s" % (settings.MEDIA_ROOT, self.upload)
         (mime_type, encoding) = mimetypes.guess_type(file_path)
         try:
             [self.content_type, self.sub_type] = mime_type.split("/")
