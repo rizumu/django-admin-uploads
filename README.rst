@@ -9,7 +9,8 @@ GUI interface.
 Currently, the following features have been written and are working:
 
 - Django 1.3 support
-- WYMeditor 0.5 rc2 bundled
+- WYMeditor (bundled from master on 3rd August 2011).
+    https://github.com/wymeditor/wymeditor/tree/master/src/wymeditor
 - TinyMCE support (probably but not sure, still need to test)
 
 Installation
