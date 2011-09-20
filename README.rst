@@ -17,9 +17,14 @@ Installation
 ============
 
 #. Add the `admin_uploads` directory to your Python path.
-#. Add `admin_uploads` to your `INSTALLED_APPS` setting so Django can find the template files and staticfiles associated with the Admin Uploads application.
-#. Create an empty uploads folder in your MEDIA_ROOT where images will be saved.
-#. Make sure you are using Django 1.3 convention of STATIC_ROOT/STATIC_URL for staticfiles and MEDIA_ROOT/MEDIA_URL for user generated content.
+#. Add `admin_uploads` to your `INSTALLED_APPS` setting so Django can
+ find the template files and staticfiles associated with the Admin
+ Uploads application.
+#. Create an empty uploads folder in your MEDIA_ROOT where images will
+ be saved.
+#. Make sure you are using Django 1.3 convention of
+ STATIC_ROOT/STATIC_URL for staticfiles and MEDIA_ROOT/MEDIA_URL for
+ user generated content.
 
 Configuration
 =============
@@ -28,7 +33,10 @@ See Janis Leidel's blogpost for more comprehensive instructions on the
 WYMeditor integration process in Django:
 http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
 
-#. Create a admin.py for any model that has a textfield for which you would like to apply either WYMEditor or WYMEditorUpload (with upload image capability). Then set the form in your Admin class, and register the model with the admin::
+#. Create a admin.py for any model that has a textfield for which you
+ would like to apply either WYMEditor or WYMEditorUpload (with upload
+ image capability). Then set the form in your Admin class, and
+ register the model with the admin::
 
     from django import forms
     from django.db.models import get_model
@@ -57,6 +65,20 @@ http://jannisleidel.com/2008/11/wysiwym-editor-widget-django-admin-interface/
     admin.site.register(NewsEntry, NewsEntryAdmin)
 
 
+For the javascript to work, you'll have to provide your own jQuery by creating a
+template ``templates/admin/base_site.html`` and including the link to
+the jQuery static file.::
+
+    {% extends "admin/base.html" %}
+
+    {% block extrahead %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    {% endblock %}
+
+I'm using jQuery 1.6.2 without issue, but it should work fine
+with older versions back to at least 1.3/1.4 as well. As noted in the
+issues it would be more efficient to use the bundled jQuery.
+
 TODOs and BUGS (out of date)
 ============================
 #. Test Cross Browser
@@ -64,8 +86,10 @@ TODOs and BUGS (out of date)
 #. Add setting to choose if Flickr, YouTube, options available
 #. on delete, remove deleted file/image from DOM
 #. get request variable in widgets.py
-#. use image icon on wymeditor & TinyMCEfor uploading? (easier way to use default WYM settings)
+#. use image icon on wymeditor & TinyMCEfor uploading? (easier way to
+ use default WYM settings)
 #. Add way to manage WYMeditor & TinyMCE options
+#. Use Django's bundled version of jQuery.
 
 BUG
 #. Doesn't insert when multiple WYMeditors on same admin.
