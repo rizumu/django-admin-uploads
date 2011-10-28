@@ -52,7 +52,7 @@ function buildImage(image_url, alt_text, align, link, use_html) {
   }
     textile += image_url + '(' + alt_text + ')!';
     html += 'src="'+image_url+'" alt="'+alt_text+'" />';
-    if (link) 
+    if (link)
         textile += ':' + link;
         html = '<a href="'+link+'">'+html+'</a>';
     if (use_html)
@@ -66,7 +66,7 @@ function buildVideoLink(video_url, title, thumb, use_html) {
     if (use_html) {
         return '<a class="flash_video" href="'+video_url+'" title="'+title+'"><img src="'+thumb+'" alt="'+title+'" /></a>';
     }
-  return '\n\n&& flash_video ' + video_url + ' &&\n\n'; 
+  return '\n\n&& flash_video ' + video_url + ' &&\n\n';
 }
 
 function buildLink(link_url, title, use_html) {
@@ -101,7 +101,7 @@ $(function(){
         $(this).parent('.popup').hide();
         return false;
     });
-  
+
   // switch between different editors //
     $('.popup .insert').click(function(){
         var use_html = true;
@@ -131,13 +131,13 @@ $(function(){
         $('.flash_video').show()
         return false;
     });
-    
+
     $('#images').click(function(){
         $('.flash_video').hide()
         $('.image').show()
         return false;
     });
-        
+
     $('#files').click(function(){
         $('.flash_video').show()
         $('.image').hide()
