@@ -16,7 +16,7 @@
         .popup li { list-style-type:none; width: 100px; margin-left: -100px;}
         .popup .close { float:right; color:#CC3434; }
         .popup input { width:116px; }
-        
+
 #upload-filter { float: left; }
 
 /* mimetypes, icons from Nuvola */
