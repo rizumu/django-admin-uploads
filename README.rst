@@ -1,3 +1,9 @@
+
+*NOTE*  please consider the django-adminfiles application as a better alternative:
+
+https://github.com/carljm/django-adminfiles
+
+
 ====================
 Django Admin Uploads
 ====================
