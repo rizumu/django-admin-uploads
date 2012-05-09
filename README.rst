@@ -1,5 +1,4 @@
-
-*NOTE*  please consider the django-adminfiles application as a better alternative:
+*NOTE*  please consider the django-adminfiles application as an alternative:
 
 https://github.com/carljm/django-adminfiles
 
